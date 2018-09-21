@@ -5,19 +5,37 @@ public class Player {
     private String name;
     private int[] setScores;
     private int gameScore;
-    private int currentSet;
+    private static int currentSet;
+    private final int maxSets;
+    private int setsWon;
 
-    private static int currentGame = 0;
-
-    public Player() {
-        setScores = new int[3];
+    public Player(int maxSets) {
+        this.maxSets = maxSets;
+        setScores = new int[maxSets];
         gameScore = 0;
         currentSet = 0;
-        currentGame++;
+        setsWon = 0;
+    }
+
+    public void setGameScore(int gameScore) {
+        this.gameScore = gameScore;
+    }
+
+    public int getCurrentSet() {
+        return currentSet;
+    }
+
+    public void setCurrentSet(int currentSet) {
+        this.currentSet = currentSet;
     }
 
     public int getCurrentSetScore() {
         return setScores[currentSet];
+    }
+
+    public void incrementCurrentSetScore() {
+        int prevScore = getCurrentSetScore();
+        setCurrentSetScore(prevScore+1);
     }
 
     public void setCurrentSetScore(int setScore) {
@@ -68,11 +86,15 @@ public class Player {
         }
     }
 
-    public static int getCurrentGame() {
-        return currentGame;
+    public int getMaxSets() {
+        return maxSets;
     }
 
-    public static void setCurrentGame(int currentGame) {
-        Player.currentGame = currentGame;
+    public int getSetsWon() {
+        return setsWon;
+    }
+
+    public void incrementSetsWon() {
+        setsWon++;
     }
 }
